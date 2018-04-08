@@ -27,6 +27,6 @@ app.post("/api/Upload", function (req, res) {
     });
 });
 
-app.listen(2000, function (a) {
+app.listen(process.env.PORT || 2000, function (a) {
     console.log("Listening to port 2000");
 });
