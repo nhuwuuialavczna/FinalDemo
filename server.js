@@ -13,7 +13,7 @@ var Storage = multer.diskStorage({
         callback(null, "./Images");
     },
     filename: function (req, file, callback) {
-        callback(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
+        callback(null, file.fieldname);
     }
 });
 
@@ -33,7 +33,7 @@ app.post("/api/Upload", function (req, res) {
         if (err) {
             return res.end("fail");
         }
-        return res.end(req.files.filename);
+        return res.end('success');
     });
 });
 
