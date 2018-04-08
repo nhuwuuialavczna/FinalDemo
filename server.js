@@ -23,6 +23,11 @@ app.get("/", function (req, res) {
     res.sendFile(__dirname + "/index.html");
 });
 
+app.get("/img", function (req, res) {
+    var fileName = req.query.fileName;
+    res.sendFile(__dirname + "/Images/"+fileName);
+});
+
 app.post("/api/Upload", function (req, res) {
     upload(req, res, function (err) {
         if (err) {
