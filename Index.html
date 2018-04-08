@@ -4,39 +4,34 @@
 <head>
     <meta charset="utf-8" />
     <title>Upload images to server using Node JS</title>
-    <script src="Scripts/jquery-3.1.1.min.js"></script>
-    <script src="Scripts/jquery.form.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
-        $(document).ready(function () {
-            var options = {
-                beforeSubmit: showRequest,  // pre-submit callback
-                success: showResponse  // post-submit callback
-            };
-
-            // bind to the form's submit event
-            $('#frmUploader').submit(function () {
-                $(this).ajaxSubmit(options);
-                // always return false to prevent standard browser submit and page navigation
-                return false;
-            });
-        });
-
-        // pre-submit callback
-        function showRequest(formData, jqForm, options) {
-            alert('Uploading is starting.');
-            return true;
-        }
-
-        // post-submit callback
-        function showResponse(responseText, statusText, xhr, $form) {
-            alert('status: ' + statusText + '\n\nresponseText: \n' + responseText );
-        }
+//        $(document).ready(function () {
+//            $("#btnSubmit").on("click", function() {
+//
+//                var file_data = $("#file").prop("files")[0];
+//                var form_data = new FormData();
+//                form_data.append("file", file_data);
+//                $.ajax({
+//                    url: "api/Upload/",
+//                    contentType: false,
+//                    processData: false,
+//                    data: form_data,
+//                    type: 'post',
+//                    success: function(data){
+//                        alert(data);
+//                    }
+//                });
+//            });
+//        });
     </script>
 </head>
 <body>
-    <form id="frmUploader" enctype="multipart/form-data" action="api/Upload/" method="post">
-        <input type="file" name="imgUploader" multiple />
-        <input type="submit" name="submit" id="btnSubmit" value="Upload" />
-    </form>
+
+<form id="frmUploader" enctype="multipart/form-data" action="api/Upload/" method="post">
+    <input type="file" name="imgUploader" multiple />
+    <input type="submit" name="submit" id="btnSubmit" value="Upload" />
+</form>
+
 </body>
 </html>
