@@ -41,7 +41,7 @@ app.post("/api/Upload", function (req, res) {
             return res.end("Something went wrong!");
         }
         var a = req.files[0].filename;
-        return res.end("File uploaded sucessfully!."+a);
+        return res.end(a);
     });
 });
 
