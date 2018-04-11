@@ -28,12 +28,17 @@ var Storage = multer.diskStorage({
     },
     filename: function (req, file, callback) {
 
-        callback(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
+        callback(null, Date.now() + "_" + file.originalname);
     }
 });
 
 var upload = multer({ storage: Storage }).array("imgUploader",5);
 
+app.get('/download', function(req, res){
+    var fileName = req.query.fileName;
+    var file = __dirname + "/Images/"+fileName;
+    res.download(file); // Set disposition and send it.
+});
 
 app.post("/api/Upload", function (req, res) {
     upload(req, res, function (err) {
