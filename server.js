@@ -1,9 +1,10 @@
 ﻿var Express = require('express');
 var multer = require('multer');
 var bodyParser = require('body-parser');
+var fs = require('fs');
 var app = Express();
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: false}));
 
 // parse application/json
 app.use(function (req, res, next) {
@@ -19,7 +20,7 @@ app.get("/", function (req, res) {
 
 app.get("/img", function (req, res) {
     var fileName = req.query.fileName;
-    res.sendFile(__dirname + "/Images/"+fileName);
+    res.sendFile(__dirname + "/Images/" + fileName);
 });
 
 var Storage = multer.diskStorage({
@@ -32,12 +33,22 @@ var Storage = multer.diskStorage({
     }
 });
 
-var upload = multer({ storage: Storage }).array("imgUploader",5);
+var upload = multer({storage: Storage}).array("imgUploader", 5);
 
-app.get('/download', function(req, res){
+app.get('/download', function (req, res) {
     var fileName = req.query.fileName;
-    var file = __dirname + "/Images/"+fileName;
+    var file = __dirname + "/Images/" + fileName;
     res.download(file); // Set disposition and send it.
+});
+
+app.get('/delete', function (req, res) {
+    var fileName = req.query.fileName;
+    var filePath = __dirname + "/Images/" + fileName;
+    fs.unlink(filePath,function(err){
+        console.log(err);
+        if(err) return res.send({data:'lol'});
+       res.send({data:'ok'});
+    });
 });
 
 app.post("/api/Upload", function (req, res) {
